@@ -50,7 +50,7 @@ func router(app *gin.Engine) {
 			// 删除导航
 			nav.GET("/del/:id",controller.NavDel)
 			// 通过id查询
-			nav.GET("/:id",controller.NavGetInfoById)
+			nav.GET("/data/:id",controller.NavGetInfoById)
 		}
 
 		// 分类管理
@@ -63,7 +63,7 @@ func router(app *gin.Engine) {
 			// 删除分类
 			sort.GET("/del/:id",controller.SortDel)
 			// 通过id查询
-			sort.GET("/:id",controller.SortGetInfoById)
+			sort.GET("/data/:id",controller.SortGetInfoById)
 		}
 
 		// carousel 轮播图管理
@@ -76,7 +76,7 @@ func router(app *gin.Engine) {
 			// 删除分类
 			carousel.GET("/del/:id",controller.CartouselDelById)
 			// 通过id查询
-			carousel.GET("/:id",controller.CarouselGetInfoById)
+			carousel.GET("/data/:id",controller.CarouselGetInfoById)
 		}
 
 
@@ -90,7 +90,7 @@ func router(app *gin.Engine) {
 			// 删除 article
 			article.GET("/del/:id",controller.ArticleDel)
 			// 通过id查询
-			article.GET("/:id",controller.ArticleGetInfoById)
+			article.GET("/data/:id",controller.ArticleGetInfoById)
 		}
 
 		// article item 管理
@@ -103,7 +103,7 @@ func router(app *gin.Engine) {
 			// 删除 article item
 			article_item.GET("/del/:id",controller.ArticleItemDel)
 			// 通过id查询
-			article_item.GET("/:id",controller.ArticleItemGetInfoById)
+			article_item.GET("/data/:id",controller.ArticleItemGetInfoById)
 		}
 	}
 
