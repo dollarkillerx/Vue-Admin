@@ -2,7 +2,7 @@
     <div class="register">
         <section class="form_container">
             <div class="manage_tip">
-                <span class="title">DollarKiller在线后台管理系统</span>
+                <span class="title">DollarKiller通用后台管理系统</span>
                 <el-form :model="registerUser" :rules="rules" ref="registerForm" label-width="80px"
                          class="registerForm">
                     <el-form-item label="用户名" prop="name">

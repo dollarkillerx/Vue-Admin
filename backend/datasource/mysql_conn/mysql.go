@@ -41,7 +41,12 @@ func init() {
 
 func mapping() {
 	sync2 := MysqlEngine.Sync2(
-		new(datamodels.DUser),
+		new(datamodels.DUser), // 用户
+		new(datamodels.DArticleItem), // 子文章
+		new(datamodels.DArticle), // 文章
+		new(datamodels.DNav), // 导航
+		new(datamodels.DCarousel), // 轮播图
+		new(datamodels.DSort), // 分类
 	)
 
 	if sync2 != nil {
