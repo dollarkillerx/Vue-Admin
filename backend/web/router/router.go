@@ -48,7 +48,7 @@ func router(app *gin.Engine) {
 			// 修改导航
 			nav.POST("/modify",controller.NavModify)
 			// 删除导航
-			nav.POST("/del/:id",controller.NavDel)
+			nav.GET("/del/:id",controller.NavDel)
 			// 通过id查询
 			nav.GET("/:id",controller.NavGetInfoById)
 		}
@@ -61,11 +61,50 @@ func router(app *gin.Engine) {
 			// 修改分类
 			sort.POST("/modify",controller.SortModify)
 			// 删除分类
-			sort.POST("/del/:id",controller.SortDel)
-			// 更过id查询
+			sort.GET("/del/:id",controller.SortDel)
+			// 通过id查询
 			sort.GET("/:id",controller.SortGetInfoById)
 		}
 
+		// carousel 轮播图管理
+		carousel := v1_auth.Group("/carousel")
+		{
+			// 添加轮播图
+			carousel.POST("/add",controller.CarouselAdd)
+			// 修改轮播图
+			carousel.POST("/modify",controller.CarouselModify)
+			// 删除分类
+			carousel.GET("/del/:id",controller.CartouselDelById)
+			// 通过id查询
+			carousel.GET("/:id",controller.CarouselGetInfoById)
+		}
+
+
+		// article 管理
+		article := v1_auth.Group("/article")
+		{
+			// 添加 article
+			article.POST("/add",controller.ArticleAdd)
+			// 修改 article
+			article.POST("/modify",controller.ArticleModify)
+			// 删除 article
+			article.GET("/del/:id",controller.ArticleDel)
+			// 通过id查询
+			article.GET("/:id",controller.ArticleGetInfoById)
+		}
+
+		// article item 管理
+		article_item := v1_auth.Group("/article_item")
+		{
+			// 添加 article item
+			article_item.POST("/add",controller.ArticleItemAdd)
+			// 修改 article item
+			article_item.POST("/modify",controller.ArticleItemModify)
+			// 删除 article item
+			article_item.GET("/del/:id",controller.ArticleItemDel)
+			// 通过id查询
+			article_item.GET("/:id",controller.ArticleItemGetInfoById)
+		}
 	}
 
 
