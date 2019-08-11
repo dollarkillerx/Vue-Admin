@@ -79,17 +79,21 @@
             submitForm(formName) {
                 this.$refs[formName].validate(valid => {
                     if (valid) {
-                        alert("submit!")
-                        // this.$axios
-                        //     .post("/api/users/register", this.registerUser)
-                        //     .then(res => {
-                        //         // 注册成功
-                        //         this.$message({
-                        //             message: "注册成功！",
-                        //             type: "success"
-                        //         });
-                        //         this.$router.push("/login");
-                        //     });
+                        // alert("submit!")
+                        // 发送注册请求
+                        this.$axios.post("/api/user/register",this.registerUser)
+                            .then(res => {
+                                this.$message({
+                                    message:"账户注册成功",
+                                    type: "success"
+                                });
+                                this.$router.push('/login')
+                            }).catch(err => {
+                            this.$message({
+                                message:"账户注册失败",
+                                type:"error"
+                            })
+                        });
                     } else {
                         console.log("error submit!!");
                         return false;

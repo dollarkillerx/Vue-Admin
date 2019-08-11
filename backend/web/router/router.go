@@ -1,6 +1,7 @@
 package router
 
 import (
+	"Vue-Admin/backend/config"
 	"Vue-Admin/backend/web/controller"
 	"Vue-Admin/backend/web/middleware"
 	"github.com/gin-gonic/gin"
@@ -8,6 +9,10 @@ import (
 
 func RegisterRouter() *gin.Engine {
 	app := gin.New()
+
+	if config.MyConfig.App.Debug {
+		app.Use(gin.Logger(), gin.Recovery())
+	}
 
 	router(app)
 
@@ -32,7 +37,7 @@ func router(app *gin.Engine) {
 	}
 
 	// v1 需要 权鉴
-	v1_auth := app.Group("api/v1",middleware.Auth)
+	v1_auth := app.Group("api/v1", middleware.Auth)
 	{
 		// 用户
 		user := v1_auth.Group("/user")
@@ -44,68 +49,66 @@ func router(app *gin.Engine) {
 		nav := v1_auth.Group("/nav")
 		{
 			// 添加导航
-			nav.POST("/add",controller.NavAdd)
+			nav.POST("/add", controller.NavAdd)
 			// 修改导航
-			nav.POST("/modify",controller.NavModify)
+			nav.POST("/modify", controller.NavModify)
 			// 删除导航
-			nav.GET("/del/:id",controller.NavDel)
+			nav.GET("/del/:id", controller.NavDel)
 			// 通过id查询
-			nav.GET("/data/:id",controller.NavGetInfoById)
+			nav.GET("/data/:id", controller.NavGetInfoById)
 		}
 
 		// 分类管理
 		sort := v1_auth.Group("/sort")
 		{
 			// 添加分类
-			sort.POST("/add",controller.SortAdd)
+			sort.POST("/add", controller.SortAdd)
 			// 修改分类
-			sort.POST("/modify",controller.SortModify)
+			sort.POST("/modify", controller.SortModify)
 			// 删除分类
-			sort.GET("/del/:id",controller.SortDel)
+			sort.GET("/del/:id", controller.SortDel)
 			// 通过id查询
-			sort.GET("/data/:id",controller.SortGetInfoById)
+			sort.GET("/data/:id", controller.SortGetInfoById)
 		}
 
 		// carousel 轮播图管理
 		carousel := v1_auth.Group("/carousel")
 		{
 			// 添加轮播图
-			carousel.POST("/add",controller.CarouselAdd)
+			carousel.POST("/add", controller.CarouselAdd)
 			// 修改轮播图
-			carousel.POST("/modify",controller.CarouselModify)
+			carousel.POST("/modify", controller.CarouselModify)
 			// 删除分类
-			carousel.GET("/del/:id",controller.CartouselDelById)
+			carousel.GET("/del/:id", controller.CartouselDelById)
 			// 通过id查询
-			carousel.GET("/data/:id",controller.CarouselGetInfoById)
+			carousel.GET("/data/:id", controller.CarouselGetInfoById)
 		}
-
 
 		// article 管理
 		article := v1_auth.Group("/article")
 		{
 			// 添加 article
-			article.POST("/add",controller.ArticleAdd)
+			article.POST("/add", controller.ArticleAdd)
 			// 修改 article
-			article.POST("/modify",controller.ArticleModify)
+			article.POST("/modify", controller.ArticleModify)
 			// 删除 article
-			article.GET("/del/:id",controller.ArticleDel)
+			article.GET("/del/:id", controller.ArticleDel)
 			// 通过id查询
-			article.GET("/data/:id",controller.ArticleGetInfoById)
+			article.GET("/data/:id", controller.ArticleGetInfoById)
 		}
 
 		// article item 管理
 		article_item := v1_auth.Group("/article_item")
 		{
 			// 添加 article item
-			article_item.POST("/add",controller.ArticleItemAdd)
+			article_item.POST("/add", controller.ArticleItemAdd)
 			// 修改 article item
-			article_item.POST("/modify",controller.ArticleItemModify)
+			article_item.POST("/modify", controller.ArticleItemModify)
 			// 删除 article item
-			article_item.GET("/del/:id",controller.ArticleItemDel)
+			article_item.GET("/del/:id", controller.ArticleItemDel)
 			// 通过id查询
-			article_item.GET("/data/:id",controller.ArticleItemGetInfoById)
+			article_item.GET("/data/:id", controller.ArticleItemGetInfoById)
 		}
 	}
-
 
 }

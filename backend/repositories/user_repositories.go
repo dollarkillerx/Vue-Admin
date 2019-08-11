@@ -28,6 +28,7 @@ func UserCheck(user *datamodels.DUser) error {
 	}
 
 	// 用户存在 验证用户密码是否正确
+
 	psw := easyutils.Md5Encode(user.Password)
 	if psw == c_user.Password {
 		return nil

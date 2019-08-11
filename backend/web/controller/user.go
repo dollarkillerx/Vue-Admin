@@ -41,6 +41,7 @@ func UserLogin(ctx *gin.Context) {
 		resp.RepMsg(ctx, defs.ErrorBadRequest)
 		return
 	}
+	log.Println(user)
 
 	// 验证
 	err = repositories.UserCheck(&user)

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Message,Loading } from 'element-ui';
+import router from './router'
 
 // 开始加载动画
 let loading;
@@ -20,6 +21,13 @@ function endLoading() {
 axios.interceptors.request.use(config => {
     // 加载动画
     startLoading();
+
+    // 如果存在token 设置到请求头中
+    if (localStorage.DKToken) {
+         // 设置统一的请求header
+        config.headers.token = localStorage.DKToken
+    }
+
     return config;
 },error => {
     return Promise.reject(error)
@@ -33,7 +41,18 @@ axios.interceptors.response.use( response => {
 },error => {
     // 错误提醒
     endLoading();
-    Message.error(error.response.data);
+
+    // 判断token是否过期
+    const {status} = error.response;
+    if (status == 401) {
+        Message.error("token失效，请重新登录！")
+        // 清除token
+        localStorage.removeItem("DKToken")
+        // 跳转到登录页面
+        router.push('/login')
+    }
+
+    // Message.error(error.response.data);
     return Promise.reject(error);
 });
 export default axios;

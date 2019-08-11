@@ -58,7 +58,7 @@ func EasyJwtGeneraToken(data *EasyJwtPayload, hour int) (string, error) {
 		log.Println(e.Error())
 		return "", e
 	}
-	payloadEnco := Base64Encode(payloadJson)
+	payloadEnco := Base64URLEncode(payloadJson)
 	// 签名
 	signature, e := RsaSignSimple(payloadEnco, easyJwtUtil.priKey) // 签名
 	if e != nil {

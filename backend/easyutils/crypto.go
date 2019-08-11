@@ -185,7 +185,7 @@ func RsaSignSimple(data, prvKey string) (string, error) {
 	if e != nil {
 		return "", e
 	}
-	return Base64Encode(sign), nil
+	return Base64URLEncode(sign), nil
 }
 
 // Rsa256 验签简单
@@ -202,12 +202,23 @@ func RsaSignVerSimple(data, signature, publicKey string) error {
 	return RsaSignVer(dat, bytes, pub)
 }
 
-// Base64编码
+// Base64标准编码
 func Base64Encode(data []byte) string {
 	return base64.StdEncoding.EncodeToString(data)
 }
 
-// Base64解码
+// Base64标准解码
 func Base64Decode(s string) ([]byte, error) {
 	return base64.StdEncoding.DecodeString(s)
+}
+
+// Base64URL编码
+func Base64URLEncode(data []byte) string {
+	return base64.URLEncoding.EncodeToString(data)
+	//return base64.RawURLEncoding.EncodeToString(data)
+}
+
+// Base64URL解码
+func Base64URLDecode(s string) ([]byte,error) {
+	return base64.URLEncoding.DecodeString(s)
 }
