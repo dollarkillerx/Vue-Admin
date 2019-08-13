@@ -41,8 +41,11 @@ const actions = {
   setUser: ({ commit }, user) => {
     commit(types.SET_USER, user)
   },
+  // 清除当前的状态
   clearCurrentState: ({ commit }) => {
-    commit(types.SET_IS_AUTNENTIATED, false)
+    // 清除授权状态
+    commit(types.SET_IS_AUTNENTIATED, false);
+    // 清空用户
     commit(types.SET_USER, null)
   }
 }

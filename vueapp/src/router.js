@@ -14,12 +14,18 @@ const router = new Router({
     },{
       path: '/index',
       name: 'index',
-      component: () => import('./views/index.vue')
+      component: () => import('./views/index.vue'),
+      children: [
+        {path: '',component: () => import('./views/home.vue')},
+        {path: '/home',name: 'home',component: () => import('./views/home.vue')},
+        {path: '/infoshow',name: 'infoshow',component: () => import('./views/infoShow.vue')},
+        {path: '/sortlist',name: 'sortlist',component: () => import('./views/sortList.vue')}
+      ]
     },{
       path: '/register',
       name: 'register',
       component: () => import('./views/register.vue')
-    },,{
+    },{
       path: '/login',
       name: 'login',
       component: () => import('./views/login.vue')
